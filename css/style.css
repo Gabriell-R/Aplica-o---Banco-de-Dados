@@ -1,0 +1,62 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px 40px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+h1,
+h2,
+h3 {
+  color: #222;
+}
+
+.formularios {
+  background-color: #ebebeb;
+  padding: 15px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+form {
+  margin-bottom: 10px;
+}
+
+input,
+button {
+  padding: 5px;
+  margin: 3px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  background-color: #fff;
+}
+
+table,
+th,
+td {
+  border: 1px solid #888;
+}
+
+th {
+  background-color: #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+td {
+  padding: 8px;
+}
+
+a {
+  color: red;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}

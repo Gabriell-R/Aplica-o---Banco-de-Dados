@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CRUD Trabalho de BD</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Sistema de Gerenciamento Esportivo</h1>
+    <p>Projeto da disciplina de Banco de Dados I</p>
+
+    <hr />
+
+    <h2>Clube</h2>
+
+    <div class="formularios">
+      <h3>Cadastrar</h3>
+      <form action="/inserir_clube" method="POST">
+        <input type="text" name="nome" placeholder="Nome do Clube" required />
+        <input type="text" name="cnpj" placeholder="CNPJ" required />
+        <input type="text" name="cidade" placeholder="Cidade" required />
+        <input
+          type="text"
+          name="estado"
+          placeholder="UF"
+          maxlength="2"
+          required
+        />
+        <label>Filiação:</label>
+        <input type="date" name="data_filiacao" required />
+        <button type="submit">Salvar Clube</button>
+      </form>
+
+      <h3>Atualizar Dados</h3>
+      <form action="/atualizar_clube" method="POST">
+        <input
+          type="number"
+          name="id_clube"
+          placeholder="ID do Clube"
+          required
+        />
+
+        <input type="text" name="novo_nome" placeholder="Novo Nome" />
+        <input type="text" name="novo_cnpj" placeholder="Novo CNPJ" />
+        <input type="text" name="nova_cidade" placeholder="Nova Cidade" />
+        <input
+          type="text"
+          name="novo_estado"
+          placeholder="Nova UF"
+          maxlength="2"
+        />
+        <label>Nova Filiação:</label>
+        <input type="date" name="nova_data_filiacao" />
+
+        <button type="submit">Atualizar Clube</button>
+      </form>
+    </div>
+
+    <h3>Lista de Clubes</h3>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>CNPJ</th>
+        <th>Cidade/UF</th>
+        <th>Data Filiação</th>
+        <th>Ação</th>
+      </tr>
+      {% for c in clubes %}
+      <tr>
+        <td>{{ c.id_clube }}</td>
+        <td>{{ c.nome }}</td>
+        <td>{{ c.cnpj }}</td>
+        <td>{{ c.cidade }} - {{ c.estado }}</td>
+        <td>{{ c.data_filiacao }}</td>
+        <td><a href="/deletar_clube/{{ c.id_clube }}">Excluir</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <hr />
+
+    <h2>Jogador</h2>
+
+    <div class="formularios">
+      <h3>Cadastrar Jogador</h3>
+      <form action="/inserir_jogador" method="POST">
+        <input type="number" name="licenca" placeholder="Licença" required />
+        <input type="text" name="posicao" placeholder="Posição" required />
+        <input type="number" name="altura" placeholder="Altura (cm)" required />
+        <input type="number" name="peso" placeholder="Peso (kg)" required />
+        <input type="text" name="primeiro_nome" placeholder="Nome" required />
+        <input type="text" name="sobrenome" placeholder="Sobrenome" required />
+        <label>Nascimento:</label>
+        <input type="date" name="data_nascimento" required />
+        <input type="text" name="cpf" placeholder="CPF" required />
+        <input type="text" name="telefones" placeholder="Telefones" />
+        <button type="submit">Salvar Jogador</button>
+      </form>
+    </div>
+
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Nome Completo</th>
+        <th>Licença</th>
+        <th>CPF</th>
+        <th>Ação</th>
+      </tr>
+      {% for j in jogadores %}
+      <tr>
+        <td>{{ j.id_jogador }}</td>
+        <td>{{ j.primeiro_nome }} {{ j.sobrenome }}</td>
+        <td>{{ j.licenca }}</td>
+        <td>{{ j.cpf }}</td>
+        <td><a href="/deletar_jogador/{{ j.id_jogador }}">Excluir</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <hr />
+
+    <h2>Contrato</h2>
+
+    <div class="formularios">
+      <h3>Firmar Contrato</h3>
+      <form action="/inserir_contrato" method="POST">
+        <input
+          type="text"
+          name="id_contrato"
+          placeholder="ID do Contrato (ex: CT01)"
+          required
+        />
+        <input
+          type="number"
+          name="id_jogador"
+          placeholder="ID do Jogador"
+          required
+        />
+        <input
+          type="number"
+          name="id_clube"
+          placeholder="ID do Clube"
+          required
+        />
+        <label>Início:</label>
+        <input type="date" name="data_inicio" required />
+        <label>Fim:</label>
+        <input type="date" name="data_fim" required />
+        <input
+          type="number"
+          step="0.01"
+          name="salario"
+          placeholder="Salário"
+          required
+        />
+        <input
+          type="number"
+          step="0.01"
+          name="multa"
+          placeholder="Multa"
+          required
+        />
+        <button type="submit">Salvar Contrato</button>
+      </form>
+    </div>
+
+    <table>
+      <tr>
+        <th>ID Contrato</th>
+        <th>ID Jogador</th>
+        <th>ID Clube</th>
+        <th>Salário</th>
+        <th>Multa</th>
+        <th>Ação</th>
+      </tr>
+      {% for ct in contratos %}
+      <tr>
+        <td>{{ ct.id_contrato }}</td>
+        <td>{{ ct.id_jogador }}</td>
+        <td>{{ ct.id_clube }}</td>
+        <td>R$ {{ ct.salario }}</td>
+        <td>R$ {{ ct.multa }}</td>
+        <td><a href="/deletar_contrato/{{ ct.id_contrato }}">Excluir</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
